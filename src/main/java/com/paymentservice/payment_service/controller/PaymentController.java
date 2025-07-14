@@ -16,7 +16,7 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @PostMapping("/create")
+    @PostMapping("/doPayment")
     public ResponseEntity<PaymentDto> createPayment(@RequestBody PaymentDto paymentDto) {
         PaymentDto createdPayment = paymentService.createPayment(paymentDto);
         return ResponseEntity.ok(createdPayment);
