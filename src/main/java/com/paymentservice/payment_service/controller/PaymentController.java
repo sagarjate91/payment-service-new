@@ -3,6 +3,7 @@ package com.paymentservice.payment_service.controller;
 import com.paymentservice.payment_service.dto.PaymentDto;
 import com.paymentservice.payment_service.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +17,14 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Value("${server.port}")
+    private String serverPort;
+
     @PostMapping("/doPayment")
     public ResponseEntity<PaymentDto> createPayment(@RequestBody PaymentDto paymentDto) {
         PaymentDto createdPayment = paymentService.createPayment(paymentDto);
+        // Log the server port for debugging purposes
+        System.out.println("Payment Service is running on port: " + serverPort);
         return ResponseEntity.ok(createdPayment);
     }
 }
